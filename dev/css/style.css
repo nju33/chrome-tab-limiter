@@ -1,0 +1,55 @@
+@charset "UTF-8";
+.block {
+  display: block;
+  margin-bottom: 0.3em;
+}
+
+button {
+  transition: 0.25s ease-in;
+  padding: 0.55em 0.89em;
+  border: rgba(0, 0, 0, 0.34);
+  background: rgba(0, 0, 0, 0.13);
+  cursor: pointer;
+  outline: none;
+}
+button:hover {
+  border: rgba(0, 0, 0, 0.18);
+  background: rgba(0, 0, 0, 0.05);
+}
+button:active {
+  background: transparent;
+}
+
+[type="number"] {
+  width: 3em;
+  text-indent: 0.35em;
+}
+
+textarea {
+  width: 70%;
+  height: 8em;
+  padding: 0.55em;
+  line-height: inherit;
+}
+
+.option- {
+  font: 16px/1.5 "Lucida Grande", "segoe UI", "ヒラギノ角ゴ ProN W3", "Hiragino Kaku Gothic ProN", Meiryo, Verdana, Arial, sans-serif;
+  color: #2b2b2b;
+  background: #f3f3f3;
+  width: 580px;
+  margin: 0 auto;
+  min-height: 100vh;
+  overflow: hidden;
+}
+.option-group {
+  margin: 2em 0;
+}
+.option-group > span:nth-child(1) {
+  margin-right: 1em;
+}
+.option-group > span:nth-child(2) {
+  margin-left: 1em;
+}
+.option-group-in-normal {
+  width: 40%;
+}

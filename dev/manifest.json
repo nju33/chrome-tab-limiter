@@ -1,0 +1,23 @@
+{
+  "manifest_version": 2,
+  "name": "__MSG_appName__",
+  "description": "__MSG_appDesc__",
+  "version": "1.0.0.0",
+  "default_locale": "ja",
+
+  "permissions": [
+    "tabs",
+    "notifications",
+    "storage"
+  ],
+
+  "icons": {
+    "16": "icon/icon_16.png",
+    "48": "icon/icon_48.png",
+    "128": "icon/icon_128.png"
+  },
+
+  "options_page": "option.html",
+
+  "background": {"scripts": ["js/background.js"]}
+}

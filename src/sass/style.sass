@@ -1,0 +1,54 @@
+@charset "utf-8"
+
+
+.block
+  display: block
+  margin-bottom: .3em
+
+button
+  transition: .25s ease-in
+  padding: .55em .89em
+  border: rgba(0,0,0,.34)
+  background: rgba(0,0,0,.13)
+  cursor: pointer
+  outline: none
+  &:hover
+    border: rgba(0,0,0,.18)
+    background: rgba(0,0,0,.05)
+  &:active
+    background: transparent
+
+[type="number"]
+  width: 3em
+  text-indent: .35em
+
+textarea
+  width: 70%
+  height: 8em
+  padding: .55em
+  line-height: inherit
+
+.option-
+  &
+    font: 16px/ 1.5 "Lucida Grande", "segoe UI", "ヒラギノ角ゴ ProN W3", "Hiragino Kaku Gothic ProN", Meiryo, Verdana, Arial, sans-serif
+    color: #2b2b2b
+    background: #f3f3f3
+    width: 580px
+    margin: 0 auto
+    min-height: 100vh
+    overflow: hidden
+
+  &group
+    margin: 2em 0
+    > span:nth-child(1)
+      margin-right: 1em
+    > span:nth-child(2)
+      margin-left: 1em
+
+  &group-radio
+  &group-select
+  &group-text
+  &group-in-normal
+    width: 40%
+
+  &group-in-small

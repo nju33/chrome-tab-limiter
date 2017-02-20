@@ -34,6 +34,10 @@ function getSetting() {
     chrome.storage.local.get(null, storage => {
       if (hasObject(storage)) {
         storage.setting.itemsRe = (() => {
+          // v1
+          if (typeof storage.setting.priority === 'string') {
+            storage.setting.items = storage.setting.priority.split(/\n+/);
+          }
           if (storage.setting.items.length === 0) {
             return null;
           }

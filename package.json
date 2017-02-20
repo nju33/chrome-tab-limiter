@@ -1,39 +1,36 @@
 {
-  "name": "tab_limiter",
-  "version": "0.0.1",
-  "description": "",
-  "main": "index.js",
+  "name": "tab-limiter",
+  "version": "0.0.0",
+  "description": "Chrome extension to set a limit on the number of tabs",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/totora0155/tab-limiter.git"
+    "url": "https://github.com/nju33/chrome-tab-limiter.git"
   },
-  "author": "totora0155",
-  "license": "CC BY",
+  "author": "nju33 <nju33.ki@gmail.com>",
+  "license": "MIT",
   "bugs": {
-    "url": "https://github.com/totora0155/tab-limiter/issues"
+    "url": "https://github.com/nju33/chrome-tab-limiter/issues"
   },
-  "homepage": "https://github.com/totora0155/tab-limiter",
+  "homepage": "https://github.com/nju33/chrome-tab-limiter",
   "devDependencies": {
-    "coffeeify": "^0.7.0",
-    "debowerify": "^0.8.1",
-    "grunt": "^0.4.5",
-    "grunt-browserify": "^2.1.4",
-    "grunt-combine-media-queries": "^1.0.19",
-    "grunt-contrib-coffee": "^0.11.1",
-    "grunt-contrib-compress": "^0.10.0",
-    "grunt-contrib-copy": "^0.5.0",
-    "grunt-contrib-htmlmin": "^0.3.0",
-    "grunt-contrib-imagemin": "^0.8.0",
-    "grunt-contrib-sass": "^0.7.4",
-    "grunt-contrib-uglify": "^0.5.1",
-    "grunt-contrib-watch": "^0.6.1",
-    "grunt-csscomb": "^3.0.0",
-    "grunt-csso": "^0.6.3",
-    "grunt-ngmin": "0.0.3",
-    "load-grunt-tasks": "^0.6.0",
-    "q": "^1.0.1"
+    "babel-core": "^6.23.1",
+    "babel-loader": "^6.3.2",
+    "babel-preset-env": "^1.1.8",
+    "css-loader": "^0.26.1",
+    "less": "^2.7.2",
+    "less-loader": "^2.2.3",
+    "vue-loader": "^11.1.0",
+    "vue-style-loader": "^2.0.0",
+    "vue-template-compiler": "^2.1.10",
+    "webpack": "^2.2.1"
+  },
+  "dependencies": {
+    "lodash.compact": "^3.0.1",
+    "lodash.escaperegexp": "^4.1.2",
+    "vue": "^2.1.10",
+    "vue-octicon": "^2.1.0"
   }
 }

@@ -3,3 +3,5 @@ _webstore/
 node_modules/
 *.sublime-project
 *.sublime-workspace
+dev/scripts
+dist

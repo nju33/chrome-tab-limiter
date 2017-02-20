@@ -8,7 +8,7 @@
     "description": "Detailed description of the application that is displayed in the Web Store"
   },
   "btnMsg1": {
-    "message": "Pinning it to cancel",
+    "message": "Reopen the tab",
     "description": "Message of button 1 to be displayed in the rich alarm"
   },
   "btnMsg2": {

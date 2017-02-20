@@ -8,7 +8,7 @@
     "description": "ウェブストアで表示されるアプリの詳細説明"
   },
   "btnMsg1": {
-    "message": "キャンセルしてピン止め",
+    "message": "タブを再度開く",
     "description": "リッチアラームに表示するボタン１のメッセージ"
   },
   "btnMsg2": {

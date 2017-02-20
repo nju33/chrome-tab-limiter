@@ -5,3 +5,4 @@ node_modules/
 *.sublime-workspace
 dev/scripts
 dist
+*.zip

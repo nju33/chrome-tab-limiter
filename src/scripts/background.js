@@ -165,15 +165,10 @@ function clearNotify() {
  * メイン処理を実行
  */
 chrome.tabs.onCreated.addListener(tab => {
-  config.currentTabAO.push(tab);
-  if (config.pinTab != null) {
-    return config.pinTab = null;
-  } else {
-    getSetting()
-      .then(setting => closeTabIfCxceedsUpperLimit(tab, setting))
-      .then(closedTab => notify(closedTab))
-      .then(closedTab => cache.notification.tab = closedTab);
-  }
+  getSetting()
+    .then(setting => closeTabIfCxceedsUpperLimit(tab, setting))
+    .then(closedTab => notify(closedTab))
+    .then(closedTab => cache.notification.tab = closedTab);
 });
 
 /**

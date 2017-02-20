@@ -3,7 +3,9 @@
   "version": "0.0.0",
   "description": "Chrome extension to set a limit on the number of tabs",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "webpack -w",
+    "build": "webpack && zip tab-limiter.zip -r dev",
+    "postbuild": "rm -rf dist"
   },
   "repository": {
     "type": "git",

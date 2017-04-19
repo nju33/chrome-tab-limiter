@@ -1,30 +1,23 @@
 import escapeRegExp from 'lodash.escaperegexp';
+import debounce from 'lodash.debounce';
 
 const storage = {};
-const notificationConfig = {
-  id: 'tabLimiter',
-  get(tab) {
-    return {
-      type: 'basic',
-      iconUrl: '../icon/icon_128.png',
-      title: 'Tab Limiter',
-      message: `'${tab.title}'
-                                                    🤓 closed`,
-      buttons: [
-        {
-          title: chrome.i18n.getMessage('btnMsg1'),
-          iconUrl: '../icon/pin.png'
-        }, {
-          title: chrome.i18n.getMessage('btnMsg2'),
-          iconUrl: '../icon/close.png'
-        }
-      ]
-    };
-  }
-};
-const cache = {
-  notification: {tab: null}
-};
+const notification = {};
+
+function getNotificationConfig(tab) {
+  return {
+    type: 'basic',
+    iconUrl: tab.favIconUrl || '../icon/default.png',
+    title: chrome.i18n.getMessage('title'),
+    message: tab.title,
+    buttons: [
+      {
+        title: chrome.i18n.getMessage('btnMsg1'),
+        iconUrl: '../icon/open.png'
+      }
+    ]
+  };
+}
 
 /**
  * 設定を取る
@@ -80,23 +73,25 @@ function getCurrentWindow() {
 /**
  * タブをピン化して戻す
  */
-function createTab() {
+function createTab(tab) {
   return new Promise(resolve => {
     chrome.tabs.create({
-      url: cache.notification.tab.url,
+      url: tab.url,
       pinned: true,
       active: false
     }, () => {
-      cache.notification.tab = null;
       resolve();
     });
   })
 }
 
-/**
- * タブを閉じる
- */
-function closeTab(re, tabs) {
+function closeTab(tab) {
+  return new Promise(resolve => {
+    chrome.tabs.remove(tab.id, () => resolve(tab));
+  });
+}
+
+function closeTabs(re, tabs, len) {
   return new Promise(resolve => {
     const priorities = tabs.filter(tab => {
       if (re === null) {
@@ -104,11 +99,20 @@ function closeTab(re, tabs) {
       }
       return re.test(tab.url);
     });
-    if (priorities.length === 0) {
-      chrome.tabs.remove(tabs[0].id, () => resolve(tabs[0]));
-    } else {
-      chrome.tabs.remove(priorities[0].id, () => resolve(priorities[0]));
+
+    const $closedTabs = [];
+    while (len-- > 0) {
+      let target = null;
+      if (priorities.length > 0) {
+        target = priorities.shift();
+      } else {
+        target = tabs.shift();
+      }
+      $closedTabs.push(closeTab(target));
     }
+
+    Promise.all($closedTabs)
+      .then(closedTabs => resolve(closedTabs));
   });
 }
 
@@ -122,22 +126,12 @@ function closeTabIfCxceedsUpperLimit(tab, setting) {
         if (tabs.length === 0) {
           resolve();
         } else if (tabs.length > setting.tabNum) {
-          closeTab(setting.itemsRe, tabs)
-            .then(closedTab => {
-              resolve(closedTab);
-            });
+          const len = tabs.length - setting.tabNum;
+          closeTabs(setting.itemsRe, tabs, len)
+            .then(closedTabs => resolve(closedTabs))
         }
       });
     });
-}
-
-/**
- * 削除されたタブ情報を表示
- */
-function notify(tab = null) {
-  if (tab !== null) {
-    return clearNotify().then(() => createNotify(tab));
-  }
 }
 
 /**
@@ -146,9 +140,16 @@ function notify(tab = null) {
 function createNotify(tab) {
   return new Promise(resolve => {
     chrome.notifications.create(
-      notificationConfig.id,
-      notificationConfig.get(tab),
-      () => resolve(tab)
+      getNotificationConfig(tab),
+      nid => {
+        notification[nid] = tab;
+        setTimeout(() => {
+          if (notification[nid]) {
+            clearNotify(nid);
+          }
+        }, 5000);
+        resolve(tab);
+      }
     )
   });
 }
@@ -156,35 +157,61 @@ function createNotify(tab) {
 /**
  * 通知を閉じる
  */
-function clearNotify() {
+function clearNotify(nid) {
   return new Promise(resolve => {
-    chrome.notifications.clear(
-      notificationConfig.id,
-      () => resolve()
-    );
+    chrome.notifications.clear(nid, () => resolve());
   });
 };
 
 /**
  * メイン処理を実行
  */
-chrome.tabs.onCreated.addListener(tab => {
+let tid = null;
+const onCreated = debounce(tab => {
   getSetting()
-    .then(setting => closeTabIfCxceedsUpperLimit(tab, setting))
-    .then(closedTab => notify(closedTab))
-    .then(closedTab => cache.notification.tab = closedTab);
+    .then(setting => {
+      return new Promise((resolve, reject) => {
+        closeTabIfCxceedsUpperLimit(tab, setting)
+          .then(closedTabs => {
+            if (setting.notify) {
+              return resolve(closedTabs);
+            }
+            reject();
+          });
+      });
+    })
+    .then(closedTabs => {
+      if (tid !== null) {
+        clearTimeout(tid);
+        tid = null;
+      }
+      closedTabs.forEach(t => createNotify(t));
+      return Promise.resolve(closedTabs);
+      return createNotify(closedTabs);
+    })
+    .catch(() => {});
+}, 500);
+chrome.tabs.onCreated.addListener(onCreated);
+
+chrome.notifications.onClosed.addListener(nid => {
+  if (notification[nid]) {
+    delete notification[nid];
+  }
+});
+
+chrome.notifications.onClicked.addListener(nid => {
+  clearNotify(nid);
 });
 
 /**
  * 通知のボタンをおした時にそれぞれ処理を実行する
  */
-chrome.notifications.onButtonClicked.addListener((id, btnIdx) => {
-  switch (btnIdx) {
-    case 0:
-      return createTab().then(() => clearNotify());
-    case 1:
-      return clearNotify();
+chrome.notifications.onButtonClicked.addListener((nid, btnIdx) => {
+  const tab = notification[nid];
+  if (typeof tab === 'undefined') {
+    return;
   }
+  createTab(tab).then(() => clearNotify(nid));
 });
 
 /**

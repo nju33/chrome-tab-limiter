@@ -1,6 +1,6 @@
 {
   "name": "tab-limiter",
-  "version": "0.0.0",
+  "version": "3.0.0",
   "description": "Chrome extension to set a limit on the number of tabs",
   "scripts": {
     "start": "webpack -w",
@@ -31,6 +31,7 @@
   },
   "dependencies": {
     "lodash.compact": "^3.0.1",
+    "lodash.debounce": "^4.0.8",
     "lodash.escaperegexp": "^4.1.2",
     "vue": "^2.1.10",
     "vue-octicon": "^2.1.0"

@@ -7,8 +7,11 @@
     "message": "When you specify an upper limit on the tab to open, open it more, and auto close from the old tab.",
     "description": "Detailed description of the application that is displayed in the Web Store"
   },
+  "title": {
+    "message": "Closed this tab with the TabLimiter"
+  },
   "btnMsg1": {
-    "message": "Reopen the tab",
+    "message": "Reopen this tab",
     "description": "Message of button 1 to be displayed in the rich alarm"
   },
   "btnMsg2": {

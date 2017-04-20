@@ -186,8 +186,6 @@ const onCreated = debounce(tab => {
         tid = null;
       }
       closedTabs.forEach(t => createNotify(t));
-      return Promise.resolve(closedTabs);
-      return createNotify(closedTabs);
     })
     .catch(() => {});
 }, 500);

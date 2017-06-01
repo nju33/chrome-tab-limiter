@@ -1,6 +1,6 @@
 {
   "name": "tab-limiter",
-  "version": "3.0.0",
+  "version": "3.1.0",
   "description": "Chrome extension to set a limit on the number of tabs",
   "scripts": {
     "start": "webpack -w",

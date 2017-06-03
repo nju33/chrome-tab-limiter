@@ -1,4 +1,5 @@
 import escapeRegExp from 'lodash.escaperegexp';
+import debounce from 'lodash.debounce';
 
 const storage = {};
 const notification = {};

@@ -97,10 +97,10 @@ export default {
         notify: this.notify,
         items: (items.length > 0 ? items : [''])
       }}, () => {
-        this.submitButtonText = 'Saved!!';
+        this.saveButtonText = 'Saved!!';
         setTimeout(() => {
-          this.submitButtonText = 'Save';
-        }, 5000);
+          this.saveButtonText = 'Save';
+        }, 2500);
       });
     }
   }

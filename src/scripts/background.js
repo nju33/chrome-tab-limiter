@@ -1,5 +1,4 @@
 import escapeRegExp from 'lodash.escaperegexp';
-import debounce from 'lodash.debounce';
 
 const storage = {};
 const notification = {};
@@ -47,12 +46,14 @@ function getSetting() {
 /**
  * 現在のウィンドウで開かれているピン化していないタブ一覧を取得
  */
-
 function getUnpinnedTabs() {
   return new Promise(resolve => {
     getCurrentWindow()
       .then(win => {
-        chrome.tabs.query({pinned: false, windowId: win.id}, tabs => {
+        chrome.tabs.query({
+          pinned: false,
+          windowId: win.id
+        }, tabs => {
           resolve(tabs);
         });
       });
@@ -102,11 +103,21 @@ function closeTabs(re, tabs, len) {
 
     const $closedTabs = [];
     while (len-- > 0) {
+      if (priorities.length === 0 && tabs.length === 0) {
+        break;
+      }
+      
       let target = null;
-      if (priorities.length > 0) {
+      if (priorities.length > 0 && priorities[0].status === 'complete') {
         target = priorities.shift();
-      } else {
+      } else if (priorities.length > 0) {
+        priorities.shift();
+        len++;
+      } else if (tabs.length > 0 && tabs[0].status === 'complete') {
         target = tabs.shift();
+      } else {
+        tabs.shift();
+        len++;
       }
       $closedTabs.push(closeTab(target));
     }
@@ -167,7 +178,7 @@ function clearNotify(nid) {
  * メイン処理を実行
  */
 let tid = null;
-const onCreated = debounce(tab => {
+const onCreated = tab => {
   getSetting()
     .then(setting => {
       return new Promise((resolve, reject) => {
@@ -188,7 +199,7 @@ const onCreated = debounce(tab => {
       closedTabs.forEach(t => createNotify(t));
     })
     .catch(() => {});
-}, 500);
+}
 chrome.tabs.onCreated.addListener(onCreated);
 
 chrome.notifications.onClosed.addListener(nid => {

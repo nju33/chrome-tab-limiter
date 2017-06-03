@@ -106,7 +106,7 @@ function closeTabs(re, tabs, len) {
       if (priorities.length === 0 && tabs.length === 0) {
         break;
       }
-      
+
       let target = null;
       if (priorities.length > 0 && priorities[0].status === 'complete') {
         target = priorities.shift();
@@ -119,7 +119,10 @@ function closeTabs(re, tabs, len) {
         tabs.shift();
         len++;
       }
-      $closedTabs.push(closeTab(target));
+
+      if (target !== null) {
+        $closedTabs.push(closeTab(target));
+      }
     }
 
     Promise.all($closedTabs)

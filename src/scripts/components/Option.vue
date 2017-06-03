@@ -12,11 +12,16 @@
       </div>
       <div class="form-group">
         <label class="label">URL to delete preferentially</label>
-        <FlexibleInput :items="items"></FlexibleInput>
+        <FlexibleInput :items="items.length === 0 ? [''] : items"></FlexibleInput>
       </div>
       <div class="form-group">
-        <button type="submit" class="button" v-text="submitButtonText"></button>
+        <button type="submit" class="button" v-text="saveButtonText"></button>
+        <button type="button" class="button" v-text="resetButtonText" @click="handleReset"></button>
       </div>
+      <!-- <div class="form-group">
+        <label class="label" for="export">Export</label>
+        <textarea readonly id="export" v-text="exportData"></textarea>
+      </div> -->
     </form>
   </section>
 </template>
@@ -32,10 +37,20 @@ export default {
   data() {
     return {
       notify: true,
-      items: [],
+      items: [''],
       tabNum: 15,
-      submitButtonText: 'Save'
+      resetButtonText: 'Reset',
+      saveButtonText: 'Save'
     };
+  },
+  computed: {
+    exportData() {
+      return JSON.stringify({
+        notify: this.notify,
+        items: this.items,
+        tabNum: this.tabNum
+      })
+    }
   },
   created() {
     if (typeof chrome === 'undefined' || typeof chrome.storage !== 'object') {
@@ -62,6 +77,11 @@ export default {
     });
   },
   methods: {
+    handleReset() {
+      this.notify = true;
+      this.items = [''];
+      this.tabNum = 15;
+    },
     handleSave() {
       if (typeof chrome === 'undefined' || typeof chrome.storage !== 'object') {
         this.submitButtonText = 'Saved!!';
@@ -70,10 +90,12 @@ export default {
         }, 5000);
         return;
       }
+      const items = compact(this.items);
+
       chrome.storage.local.set({setting: {
         tabNum: this.tabNum,
         notify: this.notify,
-        items: compact(this.items)
+        items: (items.length > 0 ? items : [''])
       }}, () => {
         this.submitButtonText = 'Saved!!';
         setTimeout(() => {

@@ -1,10 +1,11 @@
 {
   "name": "tab-limiter",
-  "version": "3.1.0",
+  "version": "3.1.1",
   "description": "Chrome extension to set a limit on the number of tabs",
   "scripts": {
     "start": "webpack -w",
-    "build": "webpack && zip tab-limiter.zip -r dev",
+    "prebuild": "test -e tab-limiter.zip && rm tab-limiter.zip",
+    "build": "NODE_ENV=production webpack && zip tab-limiter.zip -r dev",
     "postbuild": "rm -rf dist"
   },
   "repository": {
@@ -21,6 +22,7 @@
     "babel-core": "^6.23.1",
     "babel-loader": "^6.3.2",
     "babel-preset-env": "^1.1.8",
+    "babili-webpack-plugin": "^0.1.1",
     "css-loader": "^0.26.1",
     "less": "^2.7.2",
     "less-loader": "^2.2.3",

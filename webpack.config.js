@@ -1,4 +1,8 @@
 const path = require('path');
+const BabiliPlugin = require("babili-webpack-plugin");
+const compact = require('lodash.compact');
+
+const isProd = process.env.NODE_ENV === 'production';
 
 module.exports = {
   resolve: {
@@ -33,5 +37,8 @@ module.exports = {
         // }
       }
     ]
-  }
+  },
+  plugins: compact([
+    isProd ? new BabiliPlugin() : null
+  ])
 }

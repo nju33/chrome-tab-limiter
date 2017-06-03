@@ -4,7 +4,7 @@
       <div class="group">
         <input type="text" v-model="items[idx]" class="input">
         <div class="controll">
-          <button @click="del(idx)" v-if="idx !== 0" class="button">
+          <button @click="del(idx)" class="button">
             <Octicon name="trashcan"></Octicon>
           </button>
           <button @click="plus" class="button"
@@ -30,6 +30,9 @@ export default {
   methods: {
     del(idx) {
       this.items.splice(idx, 1);
+      if (this.items.length === 0) {
+        this.items.push('');
+      }
     },
     plus() {
       this.items.push('');

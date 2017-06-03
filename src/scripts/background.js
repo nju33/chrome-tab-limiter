@@ -52,11 +52,7 @@ function getUnpinnedTabs() {
   return new Promise(resolve => {
     getCurrentWindow()
       .then(win => {
-        chrome.tabs.query({
-          pinned: false,
-          status: 'complete',
-          windowId: win.id
-        }, tabs => {
+        chrome.tabs.query({pinned: false, windowId: win.id}, tabs => {
           resolve(tabs);
         });
       });
@@ -167,28 +163,11 @@ function clearNotify(nid) {
   });
 };
 
-const tabMap = new Map();
+/**
+ * メイン処理を実行
+ */
 let tid = null;
-/**
- * 作られたtabをのちの新しく作られたタブ判定のために一時的に保存しておく
- */
-const onCreated = tab => {
-  tabMap.set(tab, tab);
-};
-
-/**
- * もし新しく作られたタブで読み込みが終わったてたら処理
- */
-const onUpdated = (tabId, info, tab) => {
-  if (typeof tabMap.get(tab) === 'undefind') {
-    return;
-  }
-
-  if (info.status !== 'complete') {
-    return;
-  }
-
-  tabMap.delete(tab);
+const onCreated = debounce(tab => {
   getSetting()
     .then(setting => {
       return new Promise((resolve, reject) => {
@@ -209,10 +188,8 @@ const onUpdated = (tabId, info, tab) => {
       closedTabs.forEach(t => createNotify(t));
     })
     .catch(() => {});
-};
-
+}, 500);
 chrome.tabs.onCreated.addListener(onCreated);
-chrome.tabs.onUpdated.addListener(onUpdated);
 
 chrome.notifications.onClosed.addListener(nid => {
   if (notification[nid]) {

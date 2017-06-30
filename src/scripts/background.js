@@ -157,11 +157,6 @@ function createNotify(tab) {
       getNotificationConfig(tab),
       nid => {
         notification[nid] = tab;
-        setTimeout(() => {
-          if (notification[nid]) {
-            clearNotify(nid);
-          }
-        }, 5000);
         resolve(tab);
       }
     )

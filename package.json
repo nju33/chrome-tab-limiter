@@ -19,22 +19,22 @@
   },
   "homepage": "https://github.com/nju33/chrome-tab-limiter",
   "devDependencies": {
-    "babel-core": "^6.23.1",
-    "babel-loader": "^6.3.2",
-    "babel-preset-env": "^1.1.8",
-    "babili-webpack-plugin": "^0.1.1",
-    "css-loader": "^0.26.1",
+    "babel-core": "^6.25.0",
+    "babel-loader": "^7.1.1",
+    "babel-preset-env": "^1.5.2",
+    "babili-webpack-plugin": "^0.1.2",
+    "css-loader": "^0.28.4",
     "less": "^2.7.2",
-    "less-loader": "^2.2.3",
-    "vue-loader": "^11.1.0",
-    "vue-style-loader": "^2.0.0",
-    "vue-template-compiler": "^2.1.10",
-    "webpack": "^2.2.1"
+    "less-loader": "^4.0.4",
+    "vue-loader": "^13.0.0",
+    "vue-style-loader": "^3.0.1",
+    "vue-template-compiler": "^2.3.4",
+    "webpack": "^3.0.0"
   },
   "dependencies": {
     "lodash.compact": "^3.0.1",
     "lodash.escaperegexp": "^4.1.2",
-    "vue": "^2.1.10",
-    "vue-octicon": "^2.1.0"
+    "vue": "^2.3.4",
+    "vue-octicon": "^2.1.1"
   }
 }

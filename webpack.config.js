@@ -23,22 +23,26 @@ module.exports = {
         test: /\.js$/,
         exclude: /node_modules/,
         options: {
-          presets: ["env"]
+          presets: [
+            [
+              'env', {
+                targets: {
+                  browsers: ['last 2 chrome versions']
+                },
+                modules: false
+              }
+            ]
+          ]
         }
       },
       {
         loader: 'vue-loader',
-        test: /\.vue$/,
-        // loaders: {
-        //   less:
-        // }
-        // options: {
-        //   postcss: [require('')()]
-        // }
+        test: /\.vue$/
       }
     ]
   },
   plugins: compact([
+    isProd ? new webpack.optimize.ModuleConcatenationPlugin() : null,
     isProd ? new BabiliPlugin() : null
   ])
 }

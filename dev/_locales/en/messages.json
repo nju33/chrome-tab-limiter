@@ -8,7 +8,10 @@
     "description": "Detailed description of the application that is displayed in the Web Store"
   },
   "title": {
-    "message": "Closed this tab with the TabLimiter"
+    "message": "Closed this tab"
+  },
+  "contextMessage": {
+    "message": "Click to reopen"
   },
   "btnMsg1": {
     "message": "Reopen this tab",

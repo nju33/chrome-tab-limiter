@@ -4,7 +4,7 @@
   "description": "Chrome extension to set a limit on the number of tabs",
   "scripts": {
     "start": "webpack -w",
-    "prebuild": "test -e tab-limiter.zip && rm tab-limiter.zip",
+    "prebuild": "test -e tab-limiter.zip && rm tab-limiter.zip || :",
     "build": "NODE_ENV=production webpack && zip tab-limiter.zip -r dev",
     "postbuild": "rm -rf dist"
   },

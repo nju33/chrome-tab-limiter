@@ -1,4 +1,5 @@
 const path = require('path');
+const webpack = require('webpack');
 const BabiliPlugin = require("babili-webpack-plugin");
 const compact = require('lodash.compact');
 

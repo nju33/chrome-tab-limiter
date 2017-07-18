@@ -8,7 +8,10 @@
     "description": "ウェブストアで表示されるアプリの詳細説明"
   },
   "title": {
-    "message": "TabLimiterでこのタブを閉じました"
+    "message": "このタブを閉じました"
+  },
+  "contextMessage": {
+    "message": "クリックで再度開く"
   },
   "btnMsg1": {
     "message": "タブを再度開く",

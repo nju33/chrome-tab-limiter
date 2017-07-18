@@ -8,13 +8,9 @@ function getNotificationConfig(tab) {
     type: 'basic',
     iconUrl: tab.favIconUrl || '../icon/default.png',
     title: chrome.i18n.getMessage('title'),
-    message: tab.title,
-    buttons: [
-      {
-        title: chrome.i18n.getMessage('btnMsg1'),
-        iconUrl: '../icon/open.png'
-      }
-    ]
+    message: chrome.i18n.getMessage('contextMessage'),
+    contextMessage: tab.title,
+    requireInteraction: true,
   };
 }
 
@@ -158,6 +154,11 @@ function createNotify(tab) {
       nid => {
         notification[nid] = tab;
         resolve(tab);
+        setTimeout(() => {
+          if (typeof notification[nid] !== 'undefined') {
+            chrome.notifications.clear(nid);
+          }
+        }, 10000);
       }
     )
   });
@@ -210,14 +211,8 @@ chrome.notifications.onClicked.addListener(nid => {
   clearNotify(nid);
 });
 
-/**
- * 通知のボタンをおした時にそれぞれ処理を実行する
- */
-chrome.notifications.onButtonClicked.addListener((nid, btnIdx) => {
+chrome.notifications.onClicked.addListener(nid => {
   const tab = notification[nid];
-  if (typeof tab === 'undefined') {
-    return;
-  }
   createTab(tab).then(() => clearNotify(nid));
 });
 

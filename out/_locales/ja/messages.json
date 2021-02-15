@@ -1,0 +1,46 @@
+{
+  "appName": {
+    "message": "Tab Limiter",
+    "description": "ウェブストアで表示されるアプリ名"
+  },
+  "appDesc": {
+    "message": "開けるタブの上限を指定し、それ以上開いた時は、古いタブから自動で閉じます。",
+    "description": "ウェブストアで表示されるアプリの詳細説明"
+  },
+  "notification__closedTheTab": {
+    "message": "タブを閉じました"
+  },
+  "formLabel__upperLimitOfTheTab": {
+    "message": "タブの上限"
+  },
+  "formLabel__useNotification": {
+    "message": "通知する"
+  },
+  "formLabel__behaviorWhenANotificationClicks": {
+    "message": "通知枠をクリックした際の振る舞い"
+  },
+  "formLabel__restoreWithBlankPage": {
+    "message": "空白ページで復元する"
+  },
+  "formLabel__useGroupTab": {
+    "message": "タブグループを使う"
+  },
+  "formLabel__tabGroupName": {
+    "message": "タブグループの名前"
+  },
+  "formLabel__tabGroupColor": {
+    "message": "タブグループの色"
+  },
+  "formLabel__urlToCloseWithPriority": {
+    "message": "優先して閉じる URL"
+  },
+  "formLabel__reset": {
+    "message": "リセット"
+  },
+  "formLabel__save": {
+    "message": "保存"
+  },
+  "formMessage__saved": {
+    "message": "保存しました"
+  }
+}

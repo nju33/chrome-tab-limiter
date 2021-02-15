@@ -1,0 +1,46 @@
+{
+  "appName": {
+    "message": "Tab Limiter",
+    "description": "Application name that is displayed in the Web Store"
+  },
+  "appDesc": {
+    "message": "When you specify an upper limit on the tab to open, open it more, and auto close from the old tab.",
+    "description": "Detailed description of the application that is displayed in the Web Store"
+  },
+  "notification__closedTheTab": {
+    "message": "Closed the tab"
+  },
+  "formLabel__upperLimitOfTheTab": {
+    "message": "Upper limit of the tab"
+  },
+  "formLabel__useNotification": {
+    "message": "Use notification"
+  },
+  "formLabel__behaviorWhenANotificationClicks": {
+    "message": "Behavior when a notification clicks"
+  },
+  "formLabel__restoreWithBlankPage": {
+    "message": "Restore with blank page"
+  },
+  "formLabel__useGroupTab": {
+    "message": "Use group tab"
+  },
+  "formLabel__tabGroupName": {
+    "message": "Tab group name"
+  },
+  "formLabel__tabGroupColor": {
+    "message": "Tab group color"
+  },
+  "formLabel__urlToCloseWithPriority": {
+    "message": "URLs to close with priority"
+  },
+  "formLabel__reset": {
+    "message": "Reset"
+  },
+  "formLabel__save": {
+    "message": "Save"
+  },
+  "formMessage__saved": {
+    "message": "Saved"
+  }
+}

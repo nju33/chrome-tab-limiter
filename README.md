@@ -1,4 +1,4 @@
-<h1><img src="https://github.com/nju33/chrome-tab-limiter/blob/v2/dev/icon/icon_16.png?raw=true">&nbsp;TabLimiter</h1>
+<h1><img src="https://github.com/nju33/chrome-tab-limiter/blob/v2/dev/icon/icon_16.png?raw=true">&nbsp;Tab Limiter</h1>
 
 [![Version](https://img.shields.io/chrome-web-store/v/obkdmphdfoaajdgdlmfbpdakmgbcpfnp.svg)](https://chrome.google.com/webstore/detail/tab-limiter/obkdmphdfoaajdgdlmfbpdakmgbcpfnp)
 

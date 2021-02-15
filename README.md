@@ -2,7 +2,7 @@
 
 [![Version](https://img.shields.io/chrome-web-store/v/obkdmphdfoaajdgdlmfbpdakmgbcpfnp.svg)](https://chrome.google.com/webstore/detail/tab-limiter/obkdmphdfoaajdgdlmfbpdakmgbcpfnp)
 
-![TabLimiter Screenshot](https://github.com/nju33/chrome-tab-limiter/blob/master/screenshot.gif?raw=true)
+![TabLimiter Screenshot](https://github.com/nju33/chrome-tab-limiter/blob/v4/screenshot.gif?raw=true)
 
 Chrome extension to set a limit on the number of tabs.
 タブ数に上限を設定するChromeエクステンション

@@ -108,5 +108,6 @@
     "vue": "^2.6.12",
     "vue-octicon": "^2.1.1",
     "yup": "^0.32.8"
-  }
+  },
+  "packageManager": "yarn@3.2.4"
 }
